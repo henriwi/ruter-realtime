@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Ruter</title>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$.get("/api", function(data) {
+				var result = JSON.parse(data);
+				$(".departure").text(result.value);
+			});
+		});
+	</script>
+
+	<style type="text/css">
+		body {
+			color: #000;
+			background-color: #fff;
+		}
+
+		.departure {
+			width: 30%;
+			margin: 0 auto;
+			text-align: center;
+			font-size: 10em;
+			font-family: Arial;
+  		position: relative;
+  		top: 50%;
+  		transform: translateY(-50%);
+		}
+	</style>
+</head>
+<body>
+	<div class="departure">
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "ruter-realtime",
+  "version": "1.0.0",
+  "description": "Ruter realtime",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/henriwi/ruter-realtime.git"
+  },
+  "author": "Henrik Wingerei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/henriwi/ruter-realtime/issues"
+  },
+  "homepage": "https://github.com/henriwi/ruter-realtime",
+  "dependencies": {
+    "express": "^4.12.3",
+    "moment": "^2.10.2",
+    "request": "^2.55.0"
+  }
+}
