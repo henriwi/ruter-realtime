@@ -3,6 +3,9 @@ var express = require('express');
 var moment = require('moment');
 
 var app = express();
+app.set('port', (process.env.PORT || 8000));
+
+app.use("/", express.static("public"));
 
 app.get('/api', function(req, res) {
 
@@ -19,10 +22,6 @@ app.get('/api', function(req, res) {
 
 })
 
-app.use("/", express.static("public"));
-
-
-app.set('port', (process.env.PORT || 8000));
 var server = app.listen(app.get('port'), function() {
 	console.log("Starting...");
 })
