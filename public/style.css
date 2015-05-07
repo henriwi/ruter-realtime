@@ -1,0 +1,24 @@
+body {
+	color: #000;
+	background-color: #fff;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.departure {
+	align-self: center;
+	margin: 0 auto;
+	font-family: Arial;
+}
+
+.first {
+	vertical-align: baseline;
+	font-size: 40em;
+}
+
+.second {
+	vertical-align: baseline;
+	font-size: 20em;
+	color: #ccc;
+}
+
