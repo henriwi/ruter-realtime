@@ -18,7 +18,9 @@
   "homepage": "https://github.com/henriwi/ruter-realtime",
   "dependencies": {
     "express": "^4.12.3",
+    "http": "0.0.0",
     "moment": "^2.10.2",
-    "request": "^2.55.0"
+    "request": "^2.55.0",
+    "ws": "^0.7.1"
   }
 }

@@ -1,15 +1,40 @@
 var request = require('request');
 var express = require('express');
 var moment = require('moment');
-
+var WebSocketServer = require("ws").Server
+var http = require("http");
 var app = express();
-app.set('port', (process.env.PORT || 8000));
+
+var port = process.env.PORT || 8000
 
 app.use("/", express.static("public"));
+var server = http.createServer(app);
+server.listen(port);
 
-app.get('/api', function(req, res) {
+console.log("http server listening on %d", port);
 
-	request("http://reisapi.ruter.no/stopvisit/getdepartures/2190090", function(error, response, body) {
+var wss = new WebSocketServer({server: server});
+
+wss.on("connection", function(conn) {
+	doRequest(function(result) {
+		conn.send(JSON.stringify(result));
+	});
+
+	var interval = setInterval(function() {
+		doRequest(function(result) {
+			conn.send(JSON.stringify(result));
+		});
+	}, 20000);
+
+	conn.on("close", function() {
+		clearInterval(interval);
+	});
+});
+
+function doRequest(callback) {
+	var url = "http://reisapi.ruter.no/stopvisit/getdepartures/2190090";
+	console.log("Executing request %s", url);
+	request(url, function(error, response, body) {
 		if (!error && response.statusCode === 200) {
 			var json = JSON.parse(body)
 
@@ -17,16 +42,10 @@ app.get('/api', function(req, res) {
 			var departures = json.slice(0, 2);
 
 			var result = getNextDepartures(departures);
-			res.json(JSON.stringify(result));
+			callback(result);
 		}
 	});
-
-})
-
-var server = app.listen(app.get('port'), function() {
-	console.log("Starting...");
-})
-
+}
 
 function getNextDepartures(departures) {
 	var result = [];
